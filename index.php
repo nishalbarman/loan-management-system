@@ -46,19 +46,19 @@ if (isset($_POST['memberId'])) {
     <title>Home page</title>
     <link rel="stylesheet" type="text/css" href="Assets/css/style.css">
     <style>
-    .regForm {
-        padding: 25px;
-        width: 50%;
-        border: 1px solid green;
-        border-radius: 10px;
+        .regForm {
+            padding: 25px;
+            width: 50%;
+            border: 1px solid green;
+            border-radius: 10px;
 
-    }
+        }
 
-    input {
+        input {
 
-        height: 30px;
-        width: 100%
-    }
+            height: 30px;
+            width: 100%
+        }
     </style>
 </head>
 
@@ -67,38 +67,93 @@ if (isset($_POST['memberId'])) {
     <p></p>
 
     <div class="main">
-        <h3 class="llTl">Member sign in</h3>
-        <form class="regForm" METHOD="POST" action="<?php echo $loginFormAction; ?>" class="fom">
-            <label for="memberId"><b>ID No:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label>
-            <input type="text" autocomplete="off" placeholder="Enter member id" name="memberId" required>
-            <br /> <br />
-            <label for="password"><b>Password:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label>
-            <input type="password" id="psw" name="password" placeholder="Enter password"
-                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
-                required>
-            <br />
+        <h3 id="main-title" class="llTl">Member sign in</h3>
+        <div id="part1">
 
-            <br />
-            <input class="frmBtn" type="submit" value="Login"><br />
-            <p><i>Dont have an account?<a href="addmember.php">Register.</a></i></p>
-        </form>
+            <form id="formSubmit" class="regForm" METHOD="POST" action="<?php echo $loginFormAction; ?>" class="fom"
+                onsubmit="return false">
+                <label for="memberId"><b>ID No:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label>
+                <input type="text" autocomplete="off" placeholder="Enter member id" name="memberId" edit-me required>
+                <br /> <br />
+                <label for="password"><b>Password:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label>
+                <input type="password" id="psw" name="password" placeholder="Enter password"
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                    edit-me required>
+                <br />
+                <br />
+                <input id="loginBtn" class="frmBtn" type="submit" name="login" value="Login">
+                <p><i>Dont have an account?<a href="addmember.php">Register.</a></i></p>
+            </form>
+        </div>
+        <div id="part2" style="display: none;">
+            <form class="regForm" onsubmit="return false">
 
+                <div class="captcha-container">
+                    <div class="captcha-question">What is <span class="captcha-number">
+                            <?php $_SESSION['first'] = rand(1, 9);
+                            echo $_SESSION['first']; ?>
+                        </span> +
+                        <span class="captcha-number">
+                            <?php $_SESSION['second'] = rand(1, 9);
+                            echo $_SESSION['second']; ?>
+                        </span>?
+                    </div>
+                    <input type="number" class="captcha-input" id="captcha-value" edit-me-c>
+                    <input id="captchaBtn" class="frmBtn" type="submit" name="verify" value="Verify">
+                </div>
+            </form>
+        </div>
 
     </div>
 
     <script>
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
-    }
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
 
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
-    }
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
+
+        loginBtn.addEventListener('click', () => {
+            document.querySelectorAll('[edit-me]').forEach(element => {
+
+                if (element.value === "") {
+                    alert("Roll No and Password both are Required Bro! Kya kar raha hain tu??");
+                    return;
+                } else {
+                    document.getElementById('part1').style.display = "none";
+                    document.getElementById('part2').style.display = "block";
+                    document.getElementById('main-title').textContent = "Solve this Captcha";
+                }
+            });
+        });
+
+        captchaBtn.addEventListener('click', () => {
+            document.querySelectorAll('[edit-me-c]').forEach(element => {
+
+                if (element.value === "") {
+                    alert("Robot hai kya tu, Captcha to daal BHAII!!");
+                    return;
+                } else {
+                    let num1 = '<?php echo $_SESSION['first']; ?>';
+                    let num2 = '<?php echo $_SESSION['second']; ?>';
+                    let third = parseInt(num1) + parseInt(num2);
+                    console.log(third);
+                    console.log(element.value);
+                    if (parseInt(element.value) === third) {
+                        document.getElementById('formSubmit').submit();
+                    } else {
+                        alert("BHAII tu robot lagta hain, Captcha galat hai reee...");
+                    }
+                }
+            });
+        });
     </script>
-    <script>
+    <!-- <script>
     var myInput = document.getElementById("psw");
     var letter = document.getElementById("letter");
     var capital = document.getElementById("capital");
@@ -156,7 +211,7 @@ if (isset($_POST['memberId'])) {
             length.classList.add("invalid");
         }
     }
-    </script>
+    </script> -->
 
 
 </body>

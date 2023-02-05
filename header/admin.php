@@ -163,6 +163,7 @@ ul>li:first-of-type {
     <a href="approvedloans.php">Approved loans</a>
     <a href="unapprovedloans.php">Unapproved loans</a>
     <a href="addpayment.php">Add payments</a>
+    <a href="displayrepay.php">Repayment List</a>
     <a href="displaypayment.php">All payments</a>
     <a href="logout.php" style="text-decoration:none"><img src="../Photos/logout.png" height="25px" width="25px" />
         <font color="#CC0000"><b>Logout</b></font>
