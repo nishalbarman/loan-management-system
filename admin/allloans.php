@@ -95,8 +95,8 @@ $queryString_Recordset1 = sprintf("&totalRows_Recordset1=%d%s", $totalRows_Recor
                     <td>ID/passport No</td>
                     <td>loan type</td>
                     <td>Amount</td>
-                    <td>Income statement photo</td>
-                    <td>Loan security</td>
+                    <!-- <td>Income statement photo</td>
+                    <td>Loan security</td> -->
                     <td>Application date</td>
                 </tr>
                 <?php do { ?>
