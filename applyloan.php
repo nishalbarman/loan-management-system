@@ -141,24 +141,24 @@ $queryString_Recordset1 = sprintf("&totalRows_Recordset1=%d%s", $totalRows_Recor
     <title>Member</title>
     <link rel="stylesheet" type="text/css" href="Assets/css/style.css">
     <style>
-        form {
-            position: absolute;
-            left: 50%;
-            transform: translate(-50%);
-            display: inline-block;
-            padding: 25px;
-            width: 60%;
-            border: 1px solid green;
-            border-radius: 10px;
+    form {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+        display: inline-block;
+        padding: 25px;
+        width: 60%;
+        border: 1px solid green;
+        border-radius: 10px;
 
-        }
+    }
 
-        input,
-        select {
-            margin-bottom: 10px;
-            height: 30px;
-            width: 100%
-        }
+    input,
+    select {
+        margin-bottom: 10px;
+        height: 30px;
+        width: 100%
+    }
     </style>
 
 
@@ -176,26 +176,26 @@ $queryString_Recordset1 = sprintf("&totalRows_Recordset1=%d%s", $totalRows_Recor
             <select name="loanType" autocomplete="off">
                 <option value="">--- Select Loan ---</option>
                 <?php do { ?>
-                    <option>
-                        <?php echo $row_Recordset1['loanType']; ?>
-                    </option>
+                <option>
+                    <?php echo $row_Recordset1['loanType']; ?>
+                </option>
 
                 <?php } while ($row_Recordset1 = mysqli_fetch_assoc($Recordset1)); ?>
                 <?php if ($pageNum_Recordset1 > 0) { // Show if not first page ?>
-                    <a
-                        href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, 0, $queryString_Recordset1); ?>">First</a>
+                <a
+                    href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, 0, $queryString_Recordset1); ?>">First</a>
                 <?php } // Show if not first page ?>
                 <?php if ($pageNum_Recordset1 > 0) { // Show if not first page ?>
-                    <a
-                        href=" <?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, max(0, $pageNum_Recordset1 - 1), $queryString_Recordset1); ?>">Previous</a>
+                <a
+                    href=" <?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, max(0, $pageNum_Recordset1 - 1), $queryString_Recordset1); ?>">Previous</a>
                 <?php } // Show if not first page ?>
                 <?php if ($pageNum_Recordset1 < $totalPages_Recordset1) { // Show if not last page ?>
-                    <a
-                        href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, min($totalPages_Recordset1, $pageNum_Recordset1 + 1), $queryString_Recordset1); ?>">Next</a>
+                <a
+                    href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, min($totalPages_Recordset1, $pageNum_Recordset1 + 1), $queryString_Recordset1); ?>">Next</a>
                 <?php } // Show if not last page ?>
                 <?php if ($pageNum_Recordset1 < $totalPages_Recordset1) { // Show if not last page ?>
-                    <a
-                        href=" <?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, $totalPages_Recordset1, $queryString_Recordset1); ?>">Last</a>
+                <a
+                    href=" <?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, $totalPages_Recordset1, $queryString_Recordset1); ?>">Last</a>
                 <?php } // Show if not last page ?>
                 Records
                 <?php echo ($startRow_Recordset1 + 1) ?> to
@@ -209,19 +209,19 @@ $queryString_Recordset1 = sprintf("&totalRows_Recordset1=%d%s", $totalRows_Recor
             <input type="number" name="income" pattern="[0-9]*" required />
             <br />
             <script>
-                function loanamount() {
-                    var original = document.getElementById("original").value;
-                    var interest = document.getElementById("interest").value;
-                    var year = document.getElementById("payment_term").value;
+            function loanamount() {
+                var original = document.getElementById("original").value;
+                var interest = document.getElementById("interest").value;
+                var year = document.getElementById("payment_term").value;
 
-                    var interest1 = (Number(original) * Number(interest) * Number(year)) / 100;
-                    var total = Number(original) + Number(interest1);
+                var interest1 = (Number(original) * Number(interest) * Number(year)) / 100;
+                var total = Number(original) + Number(interest1);
 
-                    var emi = total / (year * 12);
-                    document.getElementById("total_paid").value = total;
-                    document.getElementById("emi_per_month").value = emi;
+                var emi = total / (year * 12);
+                document.getElementById("total_paid").value = total;
+                document.getElementById("emi_per_month").value = emi;
 
-                }
+            }
             </script>
 
             <label for="amount"><b>Loan amount:
@@ -254,12 +254,12 @@ $queryString_Recordset1 = sprintf("&totalRows_Recordset1=%d%s", $totalRows_Recor
             <input type="text" id="emi_per_month" pattern="[0-9]*" name="emi_per_month" readonly /><br />
 
 
-            <label for="bankStatementPhoto"><b>Statement Photo:</b></label><br />
+            <!-- <label for="bankStatementPhoto"><b>Statement Photo:</b></label><br />
             <input type="file" name="bankStatementPhoto" autocomplete="off" required /><br />
 
 
             <label for="security"><b>Loan Security:</b></label><br />
-            <input type="file" name="security" autocomplete="off" required /><br />
+            <input type="file" name="security" autocomplete="off" required /><br /> -->
 
 
             <label for="posting_date"><b>Application
@@ -281,32 +281,32 @@ $queryString_Recordset1 = sprintf("&totalRows_Recordset1=%d%s", $totalRows_Recor
         <p></p>
     </div>
     <script>
-        function openNav() {
-            document.getElementById("mySidebar").style.width = "250px";
-            document.getElementById("main").style.marginLeft = "250px";
-        }
+    function openNav() {
+        document.getElementById("mySidebar").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+    }
 
-        function closeNav() {
-            document.getElementById("mySidebar").style.width = "0";
-            document.getElementById("main").style.marginLeft = "0";
-        }
+    function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+    }
     </script>
     <script>
-        /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-        var dropdown = document.getElementsByClassName("dropdown-btn");
-        var i;
+    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
 
-        for (i = 0; i < dropdown.length; i++) {
-            dropdown[i].addEventListener("click", function () {
-                this.classList.toggle("active");
-                var dropdownContent = this.nextElementSibling;
-                if (dropdownContent.style.display === "block") {
-                    dropdownContent.style.display = "none";
-                } else {
-                    dropdownContent.style.display = "block";
-                }
-            });
-        }
+    for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var dropdownContent = this.nextElementSibling;
+            if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+            } else {
+                dropdownContent.style.display = "block";
+            }
+        });
+    }
     </script>
 
 

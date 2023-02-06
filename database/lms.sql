@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2023 at 06:30 AM
+-- Generation Time: Feb 06, 2023 at 07:36 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -20,6 +20,51 @@ SET time_zone = "+00:00";
 --
 -- Database: `lms`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `49229_508560_student_loan_repayment`
+--
+
+CREATE TABLE `49229_508560_student_loan_repayment` (
+  `id` int(255) NOT NULL,
+  `paymentId` int(255) NOT NULL,
+  `memberId` int(255) NOT NULL,
+  `amount` float NOT NULL,
+  `loanName` text NOT NULL,
+  `status` text NOT NULL DEFAULT 'Unpaid'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `49229_508560_student_loan_repayment`
+--
+
+INSERT INTO `49229_508560_student_loan_repayment` (`id`, `paymentId`, `memberId`, `amount`, `loanName`, `status`) VALUES
+(1, 1, 49229, 237.5, 'Student Loan', 'Unpaid'),
+(2, 2, 49229, 237.5, 'Student Loan', 'Unpaid'),
+(3, 3, 49229, 237.5, 'Student Loan', 'Unpaid'),
+(4, 4, 49229, 237.5, 'Student Loan', 'Unpaid'),
+(5, 5, 49229, 237.5, 'Student Loan', 'Unpaid'),
+(6, 6, 49229, 237.5, 'Student Loan', 'Unpaid'),
+(7, 7, 49229, 237.5, 'Student Loan', 'Unpaid'),
+(8, 8, 49229, 237.5, 'Student Loan', 'Unpaid'),
+(9, 9, 49229, 237.5, 'Student Loan', 'Unpaid'),
+(10, 10, 49229, 237.5, 'Student Loan', 'Unpaid'),
+(11, 11, 49229, 237.5, 'Student Loan', 'Unpaid'),
+(12, 12, 49229, 237.5, 'Student Loan', 'Unpaid'),
+(13, 13, 49229, 237.5, 'Student Loan', 'Unpaid'),
+(14, 14, 49229, 237.5, 'Student Loan', 'Unpaid'),
+(15, 15, 49229, 237.5, 'Student Loan', 'Unpaid'),
+(16, 16, 49229, 237.5, 'Student Loan', 'Unpaid'),
+(17, 17, 49229, 237.5, 'Student Loan', 'Unpaid'),
+(18, 18, 49229, 237.5, 'Student Loan', 'Unpaid'),
+(19, 19, 49229, 237.5, 'Student Loan', 'Unpaid'),
+(20, 20, 49229, 237.5, 'Student Loan', 'Unpaid'),
+(21, 21, 49229, 237.5, 'Student Loan', 'Unpaid'),
+(22, 22, 49229, 237.5, 'Student Loan', 'Unpaid'),
+(23, 23, 49229, 237.5, 'Student Loan', 'Unpaid'),
+(24, 24, 49229, 237.5, 'Student Loan', 'Unpaid');
 
 -- --------------------------------------------------------
 
@@ -91,7 +136,8 @@ CREATE TABLE `applied_loans` (
 --
 
 INSERT INTO `applied_loans` (`id`, `memberId`, `loanTableName`, `loanName`) VALUES
-(12, 58970, '58970_928826_Student_Loan_repayment', 'Student Loan');
+(12, 58970, '58970_928826_Student_Loan_repayment', 'Student Loan'),
+(13, 49229, '49229_508560_Student_Loan_repayment', 'Student Loan');
 
 -- --------------------------------------------------------
 
@@ -109,8 +155,8 @@ CREATE TABLE `loan` (
   `payment_term` int(3) NOT NULL,
   `total_paid` int(8) NOT NULL,
   `emi_per_month` int(8) NOT NULL,
-  `bankStatementPhoto` varchar(250) NOT NULL,
-  `security` varchar(250) NOT NULL,
+  `bankStatementPhoto` varchar(250) DEFAULT NULL,
+  `security` varchar(250) DEFAULT NULL,
   `posting_date` date NOT NULL,
   `status` varchar(15) NOT NULL,
   `adminRemark` varchar(100) NOT NULL,
@@ -123,7 +169,8 @@ CREATE TABLE `loan` (
 --
 
 INSERT INTO `loan` (`loanId`, `memberId`, `loanType`, `income`, `amount`, `intereset`, `payment_term`, `total_paid`, `emi_per_month`, `bankStatementPhoto`, `security`, `posting_date`, `status`, `adminRemark`, `adminRemarkDate`, `balance`) VALUES
-(42, 58970, 'Student Loan', 15000, 3000, '7', 1, 3210, 267, '', 'CERTIFICATE FROM GUIDE.docx', '2023-02-05', 'Pending', '', '0000-00-00', 15000);
+(42, 58970, 'Student Loan', 15000, 3000, '7', 1, 3210, 267, '', 'CERTIFICATE FROM GUIDE.docx', '2023-02-05', 'Pending', '', '0000-00-00', 15000),
+(43, 49229, 'Student Loan', 150000, 5000, '7', 2, 5700, 237, '', 'Screenshot (339).png', '2023-02-06', 'Pending', '', '0000-00-00', 150000);
 
 -- --------------------------------------------------------
 
@@ -175,9 +222,7 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`id`, `memberId`, `fName`, `lName`, `gender`, `phone`, `occupation`, `email`, `password`, `address`, `county`, `district`, `location`, `photo`, `dob`, `regDate`) VALUES
-(13, 58970, 'NISHAL', 'BARMAN', 'M', '09101114906', 'teacher', 'admin', 'Admin@123', 'Vill./P.O. -', 'ASSAM', 'Nalbari', 'ASSAM', 'DESIGN.docx', '2023-02-05', '2023-02-05'),
-(14, 22286, 'NISHAL', 'BARMAN', 'M', '09101114906', 'teacher', 'nishalbarman@gmail.com', 'Admin@123', 'Vill./P.O. -', 'ASSAM', 'Nalbari', 'ASSAM', 'CERTIFICATE FROM GUIDE.docx', '2023-02-05', '2023-02-05'),
-(15, 71535, 'NISHAL', 'BARMAN', 'M', '09101114906', 'farmer', 'nishalbarman@gmail.com', 'Admin@123', 'Vill./P.O. -', 'ASSAM', 'Nalbari', 'ASSAM', 'data dictionary.docx', '2023-02-05', '2023-02-05');
+(16, 49229, 'Inja', 'Pro', 'M', '1234567890', 'other', 'inja@gmail.com', '@Prabal21', 'Nalbari', 'India', 'Nalbari', 'Assam', 'CERTIFICATE FROM GUIDE.docx', '2000-01-01', '2023-02-06');
 
 -- --------------------------------------------------------
 
@@ -258,13 +303,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `applied_loans`
 --
 ALTER TABLE `applied_loans`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `loan`
 --
 ALTER TABLE `loan`
-  MODIFY `loanId` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `loanId` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `loantype`
@@ -276,7 +321,7 @@ ALTER TABLE `loantype`
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `payment`
