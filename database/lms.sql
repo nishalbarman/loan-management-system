@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2019 at 09:17 AM
--- Server version: 10.1.13-MariaDB
--- PHP Version: 5.6.20
+-- Generation Time: Feb 06, 2023 at 06:30 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -23,6 +24,39 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `58970_928826_student_loan_repayment`
+--
+
+CREATE TABLE `58970_928826_student_loan_repayment` (
+  `id` int(255) NOT NULL,
+  `paymentId` int(255) NOT NULL,
+  `memberId` int(255) NOT NULL,
+  `amount` float NOT NULL,
+  `loanName` text NOT NULL,
+  `status` text NOT NULL DEFAULT 'Unpaid'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `58970_928826_student_loan_repayment`
+--
+
+INSERT INTO `58970_928826_student_loan_repayment` (`id`, `paymentId`, `memberId`, `amount`, `loanName`, `status`) VALUES
+(1, 1, 58970, 267.5, 'Student Loan', 'Paid'),
+(2, 2, 58970, 267.5, 'Student Loan', 'Unpaid'),
+(3, 3, 58970, 267.5, 'Student Loan', 'Unpaid'),
+(4, 4, 58970, 267.5, 'Student Loan', 'Unpaid'),
+(5, 5, 58970, 267.5, 'Student Loan', 'Unpaid'),
+(6, 6, 58970, 267.5, 'Student Loan', 'Unpaid'),
+(7, 7, 58970, 267.5, 'Student Loan', 'Unpaid'),
+(8, 8, 58970, 267.5, 'Student Loan', 'Unpaid'),
+(9, 9, 58970, 267.5, 'Student Loan', 'Unpaid'),
+(10, 10, 58970, 267.5, 'Student Loan', 'Unpaid'),
+(11, 11, 58970, 267.5, 'Student Loan', 'Unpaid'),
+(12, 12, 58970, 267.5, 'Student Loan', 'Unpaid');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `admin`
 --
 
@@ -30,7 +64,7 @@ CREATE TABLE `admin` (
   `id` int(4) NOT NULL,
   `userName` varchar(15) NOT NULL,
   `password` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `admin`
@@ -38,6 +72,26 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id`, `userName`, `password`) VALUES
 (1, 'admin', 'Admin@123');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `applied_loans`
+--
+
+CREATE TABLE `applied_loans` (
+  `id` int(255) NOT NULL,
+  `memberId` int(255) NOT NULL,
+  `loanTableName` varchar(255) NOT NULL,
+  `loanName` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `applied_loans`
+--
+
+INSERT INTO `applied_loans` (`id`, `memberId`, `loanTableName`, `loanName`) VALUES
+(12, 58970, '58970_928826_Student_Loan_repayment', 'Student Loan');
 
 -- --------------------------------------------------------
 
@@ -60,16 +114,16 @@ CREATE TABLE `loan` (
   `posting_date` date NOT NULL,
   `status` varchar(15) NOT NULL,
   `adminRemark` varchar(100) NOT NULL,
-  `adminRemarkDate` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `adminRemarkDate` date NOT NULL,
+  `balance` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `loan`
 --
 
-INSERT INTO `loan` (`loanId`, `memberId`, `loanType`, `income`, `amount`, `intereset`, `payment_term`, `total_paid`, `emi_per_month`, `bankStatementPhoto`, `security`, `posting_date`, `status`, `adminRemark`, `adminRemarkDate`) VALUES
-(7, 32328507, 'School fees', 15000, 10000, '7', 1, 10700, 891, '', 'customer.jpg', '2019-06-03', 'Approved', 'adr', '2019-06-03'),
-(8, 2777680, 'School fees', 20000, 15000, '7', 1, 16050, 1337, '', 'download (1).jpg', '2019-06-03', 'pending', '', '0000-00-00');
+INSERT INTO `loan` (`loanId`, `memberId`, `loanType`, `income`, `amount`, `intereset`, `payment_term`, `total_paid`, `emi_per_month`, `bankStatementPhoto`, `security`, `posting_date`, `status`, `adminRemark`, `adminRemarkDate`, `balance`) VALUES
+(42, 58970, 'Student Loan', 15000, 3000, '7', 1, 3210, 267, '', 'CERTIFICATE FROM GUIDE.docx', '2023-02-05', 'Pending', '', '0000-00-00', 15000);
 
 -- --------------------------------------------------------
 
@@ -81,8 +135,15 @@ CREATE TABLE `loantype` (
   `id` int(4) NOT NULL,
   `loanType` varchar(15) NOT NULL,
   `description` varchar(200) NOT NULL,
-  `creationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `creationDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `loantype`
+--
+
+INSERT INTO `loantype` (`id`, `loanType`, `description`, `creationDate`) VALUES
+(3, 'Student Loan', 'Student loan is a type of loan that is needed by many of the students, it helps the students to get higher education.', '2023-02-05 07:22:19');
 
 -- --------------------------------------------------------
 
@@ -107,15 +168,16 @@ CREATE TABLE `member` (
   `photo` varchar(200) NOT NULL,
   `dob` date NOT NULL,
   `regDate` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `member`
 --
 
 INSERT INTO `member` (`id`, `memberId`, `fName`, `lName`, `gender`, `phone`, `occupation`, `email`, `password`, `address`, `county`, `district`, `location`, `photo`, `dob`, `regDate`) VALUES
-(6, 2777680, 'Randu', 'Karisa', 'M', '+254738242338', 'teacher', 'karisa', 'Admin_123', 'bungoma', 'mombasa', 'mukurweini', 'kirigiti', 'customer.jpg', '2019-06-03', '2019-06-03'),
-(1, 32328507, 'Edward', 'Mutahi', 'M', '0718533226', 'studentt', 'eddyzahil@gmail.com', 'Admin@123', '111-10101', 'nyeri', 'mukurweini', 'githi', 'add_user.png', '1995-01-09', '2019-05-24');
+(13, 58970, 'NISHAL', 'BARMAN', 'M', '09101114906', 'teacher', 'admin', 'Admin@123', 'Vill./P.O. -', 'ASSAM', 'Nalbari', 'ASSAM', 'DESIGN.docx', '2023-02-05', '2023-02-05'),
+(14, 22286, 'NISHAL', 'BARMAN', 'M', '09101114906', 'teacher', 'nishalbarman@gmail.com', 'Admin@123', 'Vill./P.O. -', 'ASSAM', 'Nalbari', 'ASSAM', 'CERTIFICATE FROM GUIDE.docx', '2023-02-05', '2023-02-05'),
+(15, 71535, 'NISHAL', 'BARMAN', 'M', '09101114906', 'farmer', 'nishalbarman@gmail.com', 'Admin@123', 'Vill./P.O. -', 'ASSAM', 'Nalbari', 'ASSAM', 'data dictionary.docx', '2023-02-05', '2023-02-05');
 
 -- --------------------------------------------------------
 
@@ -131,8 +193,16 @@ CREATE TABLE `payment` (
   `lName` varchar(15) NOT NULL,
   `amount` int(8) NOT NULL,
   `phone` varchar(13) NOT NULL,
-  `payment_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `payment_date` date NOT NULL,
+  `loanType` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`id`, `paymentId`, `memberId`, `fName`, `lName`, `amount`, `phone`, `payment_date`, `loanType`) VALUES
+(23, '1', 58970, 'NISHAL', 'BARMAN', 3000, '09101114906', '2023-02-05', '58970_928826_Student_Loan_repayment');
 
 --
 -- Indexes for dumped tables
@@ -145,11 +215,16 @@ ALTER TABLE `admin`
   ADD UNIQUE KEY `id` (`id`);
 
 --
+-- Indexes for table `applied_loans`
+--
+ALTER TABLE `applied_loans`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `loan`
 --
 ALTER TABLE `loan`
-  ADD UNIQUE KEY `loanId` (`loanId`),
-  ADD KEY `n` (`memberId`);
+  ADD UNIQUE KEY `loanId` (`loanId`);
 
 --
 -- Indexes for table `loantype`
@@ -161,16 +236,13 @@ ALTER TABLE `loantype`
 -- Indexes for table `member`
 --
 ALTER TABLE `member`
-  ADD PRIMARY KEY (`memberId`),
   ADD UNIQUE KEY `id` (`id`);
 
 --
 -- Indexes for table `payment`
 --
 ALTER TABLE `payment`
-  ADD PRIMARY KEY (`paymentId`),
-  ADD UNIQUE KEY `id` (`id`),
-  ADD KEY `m` (`memberId`);
+  ADD UNIQUE KEY `id` (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -181,41 +253,37 @@ ALTER TABLE `payment`
 --
 ALTER TABLE `admin`
   MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `applied_loans`
+--
+ALTER TABLE `applied_loans`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT for table `loan`
 --
 ALTER TABLE `loan`
-  MODIFY `loanId` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `loanId` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+
 --
 -- AUTO_INCREMENT for table `loantype`
 --
 ALTER TABLE `loantype`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT;
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `loan`
---
-ALTER TABLE `loan`
-  ADD CONSTRAINT `n` FOREIGN KEY (`memberId`) REFERENCES `member` (`memberId`) ON UPDATE CASCADE;
-
---
--- Constraints for table `payment`
---
-ALTER TABLE `payment`
-  ADD CONSTRAINT `m` FOREIGN KEY (`memberId`) REFERENCES `member` (`memberId`) ON UPDATE CASCADE;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
