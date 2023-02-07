@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2023 at 07:36 PM
+-- Generation Time: Feb 07, 2023 at 06:41 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -169,7 +169,7 @@ CREATE TABLE `loan` (
 --
 
 INSERT INTO `loan` (`loanId`, `memberId`, `loanType`, `income`, `amount`, `intereset`, `payment_term`, `total_paid`, `emi_per_month`, `bankStatementPhoto`, `security`, `posting_date`, `status`, `adminRemark`, `adminRemarkDate`, `balance`) VALUES
-(42, 58970, 'Student Loan', 15000, 3000, '7', 1, 3210, 267, '', 'CERTIFICATE FROM GUIDE.docx', '2023-02-05', 'Pending', '', '0000-00-00', 15000),
+(42, 58970, 'Student Loan', 15000, 3000, '7', 1, 3210, 267, '', 'CERTIFICATE FROM GUIDE.docx', '2023-02-05', 'Unapproved', 'None', '2023-02-07', 15000),
 (43, 49229, 'Student Loan', 150000, 5000, '7', 2, 5700, 237, '', 'Screenshot (339).png', '2023-02-06', 'Pending', '', '0000-00-00', 150000);
 
 -- --------------------------------------------------------
