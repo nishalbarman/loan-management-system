@@ -2,7 +2,7 @@
 <?php
 session_start();
 if (!(isset($_SESSION['login']) && $_SESSION['login'] === true)) {
-    header("location: ./index.php");
+    header("location: ./adminlogin.php");
     exit;
 }
 mysqli_select_db($mlms, $database_mlms);
@@ -36,17 +36,17 @@ $totalRows_Recordset2 = mysqli_num_rows($Recordset2);
             <table align="center" width="70%" height="40%">
                 <tr>
                     <td align="center"><a href="displaymember.php" title="click to view your Members"
-                            style="text-decoration:none"><img src="../Photos/customer.jpg" height="180px"
+                            style="text-decoration:none"><img src="../Photos/customer.png" height="180px"
                                 width="180px" /><br />
-                            Total members &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?php echo $totalRows_Recordset1 ?>
+                            Total Users &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <!-- <?php echo $totalRows_Recordset1 ?> -->
                         </a></td>
 
-                    <td align="center"><a href="displayloantype.php" title="click to view loan type"
+                    <td align="center"><a href="pendingloans.php" title="click to view loan type"
                             style="text-decoration:none"><img src="../Photos/loan.png" height="180px"
-                                width="180px" /><br />Total loan
+                                width="180px" /><br />Pending Loans
                             type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <?php echo $totalRows_Recordset2 ?>
+                            <!-- <?php echo $totalRows_Recordset2 ?> -->
                         </a></td>
 
                     <!-- <td align="center"><a href="reports.php" title="click to view customers Reports"
