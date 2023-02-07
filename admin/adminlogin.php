@@ -1,8 +1,11 @@
 <?php require_once('../Connections/mlms.php');
-session_start();
-?>
 
-<?php
+session_start();
+if ((isset($_SESSION['login']) && $_SESSION['login'] === true)) {
+    header("location: ./dashboard.php");
+    exit;
+}
+
 // *** Validate request to login to this site.
 if (!isset($_SESSION)) {
     session_start();

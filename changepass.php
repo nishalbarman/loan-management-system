@@ -2,6 +2,11 @@
 <?php
 session_start();
 
+if (!(isset($_SESSION['login']) && $_SESSION['login'] === true)) {
+    header("location: ./index.php");
+    exit;
+}
+
 if (!function_exists("GetSQLValueString")) {
     function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
     {
@@ -70,29 +75,29 @@ $totalRows_Recordset1 = mysqli_num_rows($Recordset1);
     <title>Member</title>
     <link rel="stylesheet" type="text/css" href="Assets/css/style.css">
     <style>
-    .regForm {
-        /* position: absolute;
+        .regForm {
+            /* position: absolute;
         left: 50%;
         transform: translate(-50%);
         display: inline-block;
         padding: 25px; */
-        width: 60%;
-        padding: 25px;
-        /* border: 1px solid green;
+            width: 60%;
+            padding: 25px;
+            /* border: 1px solid green;
         border-radius: 10px; */
 
-    }
+        }
 
-    input,
-    select {
-        margin-bottom: 10px;
-        height: 30px;
-        width: 100%
-    }
+        input,
+        select {
+            margin-bottom: 10px;
+            height: 30px;
+            width: 100%
+        }
 
-    label {
-        text-align: center;
-    }
+        label {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -121,32 +126,32 @@ $totalRows_Recordset1 = mysqli_num_rows($Recordset1);
     </div>
 
     <script>
-    function openNav() {
-        document.getElementById("mySidebar").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
-    }
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
 
-    function closeNav() {
-        document.getElementById("mySidebar").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
-    }
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
     </script>
     <script>
-    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-    var dropdown = document.getElementsByClassName("dropdown-btn");
-    var i;
+        /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
 
-    for (i = 0; i < dropdown.length; i++) {
-        dropdown[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var dropdownContent = this.nextElementSibling;
-            if (dropdownContent.style.display === "block") {
-                dropdownContent.style.display = "none";
-            } else {
-                dropdownContent.style.display = "block";
-            }
-        });
-    }
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
     </script>
 
 </body>

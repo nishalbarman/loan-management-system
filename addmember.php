@@ -5,6 +5,11 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+if ((isset($_SESSION['login']) && $_SESSION['login'] === true)) {
+    header("location: ./loanhistory.php");
+    exit;
+}
+
 // ** Logout the current user. **
 $logoutAction = $_SERVER['PHP_SELF'] . "?doLogout=true";
 if ((isset($_SERVER['QUERY_STRING'])) && ($_SERVER['QUERY_STRING'] != "")) {
@@ -105,30 +110,30 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form")) {
     <title>Sign UP</title>
     <link rel="stylesheet" type="text/css" href="Assets/css/style.css">
     <style>
-    form {
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%);
-        display: inline-block;
-        padding: 25px;
-        width: 60%;
-        border: 1px solid green;
-        border-radius: 10px;
+        form {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+            display: inline-block;
+            padding: 25px;
+            width: 60%;
+            border: 1px solid green;
+            border-radius: 10px;
 
-    }
+        }
 
-    label {
+        label {
 
-        float: left;
+            float: left;
 
-    }
+        }
 
-    input,
-    select {
-        margin-bottom: 10px;
-        height: 30px;
-        width: 100%
-    }
+        input,
+        select {
+            margin-bottom: 10px;
+            height: 30px;
+            width: 100%
+        }
     </style>
 </head>
 <body>
@@ -235,67 +240,67 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form")) {
         </div>
     </center>
     <script>
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
-    }
-
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
-    }
-    </script>
-    <script>
-    var dropdown = document.getElementsByClassName("dropdown-btn");
-    var i;
-
-    for (i = 0; i < dropdown.length; i++) {
-        dropdown[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var dropdownContent = this.nextElementSibling;
-            if (dropdownContent.style.display === "block") {
-                dropdownContent.style.display = "none";
-            } else {
-                dropdownContent.style.display = "block";
-            }
-        });
-    }
-    </script>
-    <script>
-    const mainForm = document.getElementById("regForm");
-    const submitMe = document.getElementById("regForm");
-    const otpText = document.getElementById("otp-text");
-    const otpForm = document.getElementById("otpForm");
-    let hd;
-
-    function submitForm() {
-        mainForm.style.display = "none";
-        otpForm.style.display = "block";
-        otpText.innerHTML = "Preparing, please wait..";
-        otpText.style.display = 'block';
-        let email = document.getElementById("email").value;
-        // otp = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000
-        // console.log(hd);
-        fetch('./send.php?email=' + email).then(res => res.json()).then(data => {
-            // console.log(data);
-            if (data.status == 1) {
-                hd = data.kht;
-                console.log(hd);
-                otpText.innerHTML = "OTP has been sent on email";
-            } else {
-                otpText.innerHTML = "Some error occured, click on Resend";
-            }
-        });
-    }
-
-    function validateOtp() {
-        let inputOtp = document.getElementById("otp").value;
-        if (inputOtp == hd) {
-            submitMe.submit();
-        } else {
-            alert("Invalid OTP.");
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
         }
-    }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
+    </script>
+    <script>
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
+    </script>
+    <script>
+        const mainForm = document.getElementById("regForm");
+        const submitMe = document.getElementById("regForm");
+        const otpText = document.getElementById("otp-text");
+        const otpForm = document.getElementById("otpForm");
+        let hd;
+
+        function submitForm() {
+            mainForm.style.display = "none";
+            otpForm.style.display = "block";
+            otpText.innerHTML = "Preparing, please wait..";
+            otpText.style.display = 'block';
+            let email = document.getElementById("email").value;
+            // otp = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000
+            // console.log(hd);
+            fetch('./send.php?email=' + email).then(res => res.json()).then(data => {
+                // console.log(data);
+                if (data.status == 1) {
+                    hd = data.kht;
+                    console.log(hd);
+                    otpText.innerHTML = "OTP has been sent on email";
+                } else {
+                    otpText.innerHTML = "Some error occured, click on Resend";
+                }
+            });
+        }
+
+        function validateOtp() {
+            let inputOtp = document.getElementById("otp").value;
+            if (inputOtp == hd) {
+                submitMe.submit();
+            } else {
+                alert("Invalid OTP.");
+            }
+        }
     </script>
 
 </body>

@@ -1,5 +1,12 @@
 <?php require_once('../Connections/mlms.php'); ?>
 <?php
+
+session_start();
+if (!(isset($_SESSION['login']) && $_SESSION['login'] === true)) {
+  header("location: ./index.php");
+  exit;
+}
+
 if (!function_exists("GetSQLValueString")) {
   function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
   {
@@ -57,59 +64,59 @@ if (isset($_GET['totalRows_DetailRS1'])) {
 $totalPages_DetailRS1 = ceil($totalRows_DetailRS1 / $maxRows_DetailRS1) - 1;
 ?>
 <!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <h2>Loan Management System</h2>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <h2>Loan Management System</h2>
 </head>
 
 <body>
 
-    <table border="1" align="center">
-        <tr>
-            <td>paymentId</td>
-            <td>
-                <?php echo $row_DetailRS1['paymentId']; ?>
-            </td>
-        </tr>
-        <tr>
-            <td>memberId</td>
-            <td>
-                <?php echo $row_DetailRS1['memberId']; ?>
-            </td>
-        </tr>
-        <tr>
-            <td>fName</td>
-            <td>
-                <?php echo $row_DetailRS1['fName']; ?>
-            </td>
-        </tr>
-        <tr>
-            <td>lName</td>
-            <td>
-                <?php echo $row_DetailRS1['lName']; ?>
-            </td>
-        </tr>
-        <tr>
-            <td>amount</td>
-            <td>
-                <?php echo $row_DetailRS1['amount']; ?>
-            </td>
-        </tr>
-        <tr>
-            <td>phone</td>
-            <td>
-                <?php echo $row_DetailRS1['phone']; ?>
-            </td>
-        </tr>
-        <tr>
-            <td>payment_date</td>
-            <td>
-                <?php echo $row_DetailRS1['payment_date']; ?>
-            </td>
-        </tr>
-    </table>
+  <table border="1" align="center">
+    <tr>
+      <td>paymentId</td>
+      <td>
+        <?php echo $row_DetailRS1['paymentId']; ?>
+      </td>
+    </tr>
+    <tr>
+      <td>memberId</td>
+      <td>
+        <?php echo $row_DetailRS1['memberId']; ?>
+      </td>
+    </tr>
+    <tr>
+      <td>fName</td>
+      <td>
+        <?php echo $row_DetailRS1['fName']; ?>
+      </td>
+    </tr>
+    <tr>
+      <td>lName</td>
+      <td>
+        <?php echo $row_DetailRS1['lName']; ?>
+      </td>
+    </tr>
+    <tr>
+      <td>amount</td>
+      <td>
+        <?php echo $row_DetailRS1['amount']; ?>
+      </td>
+    </tr>
+    <tr>
+      <td>phone</td>
+      <td>
+        <?php echo $row_DetailRS1['phone']; ?>
+      </td>
+    </tr>
+    <tr>
+      <td>payment_date</td>
+      <td>
+        <?php echo $row_DetailRS1['payment_date']; ?>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>
 <?php

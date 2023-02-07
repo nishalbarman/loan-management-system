@@ -1,5 +1,12 @@
 <?php require_once('../Connections/mlms.php'); ?>
 <?php
+
+session_start();
+if (!(isset($_SESSION['login']) && $_SESSION['login'] === true)) {
+  header("location: ./index.php");
+  exit;
+}
+
 if (!function_exists("GetSQLValueString")) {
   function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
   {
@@ -57,62 +64,62 @@ if (isset($_GET['totalRows_DetailRS1'])) {
 $totalPages_DetailRS1 = ceil($totalRows_DetailRS1 / $maxRows_DetailRS1) - 1;
 ?>
 <!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Untitled Document</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Untitled Document</title>
 </head>
 <center>
-    <body>
-        <script>
-        function printdocument() {
-            a = document.getElementById("allloanss").innerHTML;
-            document.write(a);
-            window.print();
-        }
-        </script>
-        <div id="allloanss">
-            <h3> Microfinance loan report</h3>
+  <body>
+    <script>
+      function printdocument() {
+        a = document.getElementById("allloanss").innerHTML;
+        document.write(a);
+        window.print();
+      }
+    </script>
+    <div id="allloanss">
+      <h3> Microfinance loan report</h3>
 
-            ID/Passport No<font color="#0099FF">
-                <?php echo $row_DetailRS1['memberId']; ?>
-            </font><br />
-            Loan type<font color="#0099FF">
-                <?php echo $row_DetailRS1['loanType']; ?>
-            </font><br />
-            income<font color="#0099FF">
-                <?php echo $row_DetailRS1['income']; ?>
-            </font><br />
-            Payment term<font color="#0099FF">
-                <?php echo $row_DetailRS1['payment_term']; ?>
-            </font><br />
-            Amount<font color="#0099FF">
-                <?php echo $row_DetailRS1['total_paid']; ?>
-            </font><br />
-            Monthly pay<font color="#0099FF">
-                <?php echo $row_DetailRS1['emi_per_month']; ?>
-            </font><br />
-            Income statement photo<font color="#0099FF">
-                <?php echo $row_DetailRS1['bankStatementPhoto']; ?>
-            </font><br />
-            Loan security<font color="#0099FF">
-                <?php echo $row_DetailRS1['security']; ?>
-            </font><br />
-            Application date<font color="#0099FF">
-                <?php echo $row_DetailRS1['posting_date']; ?>
-            </font><br />
-            Status<font color="#0099FF">
-                <?php echo $row_DetailRS1['status']; ?>
-            </font><br />
-            Admin remark<font color="#0099FF">
-                <?php echo $row_DetailRS1['adminRemark']; ?>
-            </font><br />
-            Admin remark date<font color="#0099FF">
-                <?php echo $row_DetailRS1['adminRemarkDate']; ?>
-            </font><br />
-            <p align="right"><input type="button" value="Print" onclick="printdocument()" />
-    </body>
+      ID/Passport No<font color="#0099FF">
+        <?php echo $row_DetailRS1['memberId']; ?>
+      </font><br />
+      Loan type<font color="#0099FF">
+        <?php echo $row_DetailRS1['loanType']; ?>
+      </font><br />
+      income<font color="#0099FF">
+        <?php echo $row_DetailRS1['income']; ?>
+      </font><br />
+      Payment term<font color="#0099FF">
+        <?php echo $row_DetailRS1['payment_term']; ?>
+      </font><br />
+      Amount<font color="#0099FF">
+        <?php echo $row_DetailRS1['total_paid']; ?>
+      </font><br />
+      Monthly pay<font color="#0099FF">
+        <?php echo $row_DetailRS1['emi_per_month']; ?>
+      </font><br />
+      Income statement photo<font color="#0099FF">
+        <?php echo $row_DetailRS1['bankStatementPhoto']; ?>
+      </font><br />
+      Loan security<font color="#0099FF">
+        <?php echo $row_DetailRS1['security']; ?>
+      </font><br />
+      Application date<font color="#0099FF">
+        <?php echo $row_DetailRS1['posting_date']; ?>
+      </font><br />
+      Status<font color="#0099FF">
+        <?php echo $row_DetailRS1['status']; ?>
+      </font><br />
+      Admin remark<font color="#0099FF">
+        <?php echo $row_DetailRS1['adminRemark']; ?>
+      </font><br />
+      Admin remark date<font color="#0099FF">
+        <?php echo $row_DetailRS1['adminRemarkDate']; ?>
+      </font><br />
+      <p align="right"><input type="button" value="Print" onclick="printdocument()" />
+  </body>
 </center>
 </html>
 <?php

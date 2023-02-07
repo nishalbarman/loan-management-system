@@ -32,6 +32,7 @@ if (isset($_POST['memberId'])) {
         //declare two session variables and assign them
         $_SESSION['MM_Username'] = $loginUsername;
         $_SESSION['MM_UserGroup'] = $loginStrGroup;
+        $_SESSION['login'] = true;
         header("Location: " . $MM_redirectLoginSuccess);
     } else {
         header("Location: " . $MM_redirectLoginFailed);

@@ -1,5 +1,12 @@
 <?php require_once('../Connections/mlms.php'); ?>
 <?php
+
+session_start();
+if (!(isset($_SESSION['login']) && $_SESSION['login'] === true)) {
+    header("location: ./index.php");
+    exit;
+}
+
 $maxRows_DetailRS1 = 10;
 $pageNum_DetailRS1 = 0;
 if (isset($_GET['pageNum_DetailRS1'])) {

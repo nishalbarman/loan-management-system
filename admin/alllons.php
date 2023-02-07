@@ -1,5 +1,10 @@
 <?php require_once('../Connections/comm.php'); ?>
 <?php
+session_start();
+if (!(isset($_SESSION['login']) && $_SESSION['login'] === true)) {
+  header("location: ./index.php");
+  exit;
+}
 if (!function_exists("GetSQLValueString")) {
   function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
   {
@@ -57,56 +62,56 @@ if (isset($_GET['totalRows_DetailRS1'])) {
 $totalPages_DetailRS1 = ceil($totalRows_DetailRS1 / $maxRows_DetailRS1) - 1;
 ?>
 <!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Untitled Document</title>
-    <link rel="stylesheet" type="text/css" href="../Assets/css/body.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Untitled Document</title>
+  <link rel="stylesheet" type="text/css" href="../Assets/css/body.css">
 </head>
 <center>
-    <body bgcolor="#CCCCCC" marginheight=""="60%" marginwidth="40%">
-        <div class="container">
-            <script>
-            function printdocument() {
-                a = document.getElementById("alllons").innerHTML;
-                document.write(a);
-                window.print();
-            }
-            </script>
-            <div id="alllons">
-                <center>Community based organization loan management system</center>
-                <p align="left">ID/passport Number of applicant:<font color="#0066FF">
-                        <?php echo $row_DetailRS1['memberId']; ?>
-                    </font>
-                </p><br />
-                <p align="left">loan type applied:<font color="#0066FF">
-                        <?php echo $row_DetailRS1['loanType']; ?>
-                    </font>
-                </p><br />
-                <p align="left"> income per month:<font color="#0066FF">
-                        <?php echo $row_DetailRS1['income']; ?>
-                    </font>
-                </p><br />
-                <p align="left">income statement Photo:<font color="#0066FF">
-                        <?php echo $row_DetailRS1['bankStatementPhoto']; ?>
-                    </font>
-                </p><br />
-                <p align="left">security in case of not paying:<font color="#0066FF">
-                        <?php echo $row_DetailRS1['security']; ?>
-                    </font>
-                </p><br />
-                <p align="left">Application date:<font color="#0066FF">
-                        <?php echo $row_DetailRS1['posting_date']; ?>
-                    </font>
-                </p><br />
-                <p align="left">Status:<font color="#0066FF">
-                        <?php echo $row_DetailRS1['status']; ?>
-                    </font>
-                </p><br />
-                <p align="right"><input type="button" value="Print" onclick="printdocument()" />
-            </div>
-    </body>
+  <body bgcolor="#CCCCCC" marginheight=""="60%" marginwidth="40%">
+    <div class="container">
+      <script>
+        function printdocument() {
+          a = document.getElementById("alllons").innerHTML;
+          document.write(a);
+          window.print();
+        }
+      </script>
+      <div id="alllons">
+        <center>Community based organization loan management system</center>
+        <p align="left">ID/passport Number of applicant:<font color="#0066FF">
+            <?php echo $row_DetailRS1['memberId']; ?>
+          </font>
+        </p><br />
+        <p align="left">loan type applied:<font color="#0066FF">
+            <?php echo $row_DetailRS1['loanType']; ?>
+          </font>
+        </p><br />
+        <p align="left"> income per month:<font color="#0066FF">
+            <?php echo $row_DetailRS1['income']; ?>
+          </font>
+        </p><br />
+        <p align="left">income statement Photo:<font color="#0066FF">
+            <?php echo $row_DetailRS1['bankStatementPhoto']; ?>
+          </font>
+        </p><br />
+        <p align="left">security in case of not paying:<font color="#0066FF">
+            <?php echo $row_DetailRS1['security']; ?>
+          </font>
+        </p><br />
+        <p align="left">Application date:<font color="#0066FF">
+            <?php echo $row_DetailRS1['posting_date']; ?>
+          </font>
+        </p><br />
+        <p align="left">Status:<font color="#0066FF">
+            <?php echo $row_DetailRS1['status']; ?>
+          </font>
+        </p><br />
+        <p align="right"><input type="button" value="Print" onclick="printdocument()" />
+      </div>
+  </body>
 </center>
 </html>
 <?php

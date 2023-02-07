@@ -1,6 +1,11 @@
 <?php require_once('Connections/mlms.php'); ?>
 <?php
 session_start();
+
+if (!(isset($_SESSION['login']) && $_SESSION['login'] === true)) {
+    header("location: ./index.php");
+    exit;
+}
 if (!function_exists("GetSQLValueString")) {
     function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
     {
@@ -103,28 +108,28 @@ $queryString_Recordset1 = sprintf("&totalRows_Recordset1=%d%s", $totalRows_Recor
                         <td>Payment date</td>
                     </tr>
                     <?php do { ?>
-                    <tr>
-                        <td><a href="paymentlist.php?recordID=<?php echo $row_Recordset1['paymentId']; ?>">
-                                <?php echo $row_Recordset1['paymentId']; ?>&nbsp; </a></td>
-                        <td>
-                            <?php echo $row_Recordset1['memberId']; ?>&nbsp;
-                        </td>
-                        <td>
-                            <?php echo $row_Recordset1['fName']; ?>&nbsp;
-                        </td>
-                        <td>
-                            <?php echo $row_Recordset1['lName']; ?>&nbsp;
-                        </td>
-                        <td>
-                            <?php echo $row_Recordset1['amount']; ?>&nbsp;
-                        </td>
-                        <td>
-                            <?php echo $row_Recordset1['phone']; ?>&nbsp;
-                        </td>
-                        <td>
-                            <?php echo $row_Recordset1['payment_date']; ?>&nbsp;
-                        </td>
-                    </tr>
+                        <tr>
+                            <td><a href="paymentlist.php?recordID=<?php echo $row_Recordset1['paymentId']; ?>">
+                                    <?php echo $row_Recordset1['paymentId']; ?>&nbsp; </a></td>
+                            <td>
+                                <?php echo $row_Recordset1['memberId']; ?>&nbsp;
+                            </td>
+                            <td>
+                                <?php echo $row_Recordset1['fName']; ?>&nbsp;
+                            </td>
+                            <td>
+                                <?php echo $row_Recordset1['lName']; ?>&nbsp;
+                            </td>
+                            <td>
+                                <?php echo $row_Recordset1['amount']; ?>&nbsp;
+                            </td>
+                            <td>
+                                <?php echo $row_Recordset1['phone']; ?>&nbsp;
+                            </td>
+                            <td>
+                                <?php echo $row_Recordset1['payment_date']; ?>&nbsp;
+                            </td>
+                        </tr>
                     <?php } while ($row_Recordset1 = mysqli_fetch_assoc($Recordset1)); ?>
                 </table>
                 Records
@@ -136,26 +141,26 @@ $queryString_Recordset1 = sprintf("&totalRows_Recordset1=%d%s", $totalRows_Recor
                     <tr>
                         <td>
                             <?php if ($pageNum_Recordset1 > 0) { // Show if not first page ?>
-                            <a
-                                href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, 0, $queryString_Recordset1); ?>">First</a>
+                                <a
+                                    href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, 0, $queryString_Recordset1); ?>">First</a>
                             <?php } // Show if not first page ?>
                         </td>
                         <td>
                             <?php if ($pageNum_Recordset1 > 0) { // Show if not first page ?>
-                            <a
-                                href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, max(0, $pageNum_Recordset1 - 1), $queryString_Recordset1); ?>">Previous</a>
+                                <a
+                                    href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, max(0, $pageNum_Recordset1 - 1), $queryString_Recordset1); ?>">Previous</a>
                             <?php } // Show if not first page ?>
                         </td>
                         <td>
                             <?php if ($pageNum_Recordset1 < $totalPages_Recordset1) { // Show if not last page ?>
-                            <a
-                                href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, min($totalPages_Recordset1, $pageNum_Recordset1 + 1), $queryString_Recordset1); ?>">Next</a>
+                                <a
+                                    href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, min($totalPages_Recordset1, $pageNum_Recordset1 + 1), $queryString_Recordset1); ?>">Next</a>
                             <?php } // Show if not last page ?>
                         </td>
                         <td>
                             <?php if ($pageNum_Recordset1 < $totalPages_Recordset1) { // Show if not last page ?>
-                            <a
-                                href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, $totalPages_Recordset1, $queryString_Recordset1); ?>">Last</a>
+                                <a
+                                    href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, $totalPages_Recordset1, $queryString_Recordset1); ?>">Last</a>
                             <?php } // Show if not last page ?>
                         </td>
                     </tr>
@@ -165,32 +170,32 @@ $queryString_Recordset1 = sprintf("&totalRows_Recordset1=%d%s", $totalRows_Recor
         </div>
     </center>
     <script>
-    function openNav() {
-        document.getElementById("mySidebar").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
-    }
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
 
-    function closeNav() {
-        document.getElementById("mySidebar").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
-    }
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
     </script>
     <script>
-    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-    var dropdown = document.getElementsByClassName("dropdown-btn");
-    var i;
+        /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
 
-    for (i = 0; i < dropdown.length; i++) {
-        dropdown[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var dropdownContent = this.nextElementSibling;
-            if (dropdownContent.style.display === "block") {
-                dropdownContent.style.display = "none";
-            } else {
-                dropdownContent.style.display = "block";
-            }
-        });
-    }
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
     </script>
 
 

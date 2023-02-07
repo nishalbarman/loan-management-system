@@ -1,6 +1,12 @@
 <?php require_once('Connections/mlms.php'); ?>
 <?php
 session_start();
+
+if (!(isset($_SESSION['login']) && $_SESSION['login'] === true)) {
+    header("location: ./index.php");
+    exit;
+}
+
 if (!function_exists("GetSQLValueString")) {
     function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
     {
@@ -112,7 +118,7 @@ $queryString_lonhist = sprintf("&totalRows_lonhist=%d%s", $totalRows_lonhist, $q
                     <tr>
 
                         <!-- <td><a href="loanhist.php?recordID=<?php echo $row_lonhist['loanId']; ?>">
-                                                                        <?php echo $row_lonhist['loanId']; ?>&nbsp; </a></td> -->
+                                                                                <?php echo $row_lonhist['loanId']; ?>&nbsp; </a></td> -->
                         <td>
                             <?php echo $row_lonhist['memberId']; ?>&nbsp;
                         </td>

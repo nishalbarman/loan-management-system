@@ -1,5 +1,11 @@
 <?php require_once('Connections/mlms.php'); ?>
 <?php
+session_start();
+if (!(isset($_SESSION['login']) && $_SESSION['login'] === true)) {
+    header("location: ./index.php");
+    exit;
+}
+
 if (!function_exists("GetSQLValueString")) {
     function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
     {

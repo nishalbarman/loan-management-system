@@ -1,5 +1,11 @@
 <?php require_once('Connections/mlms.php'); ?>
 <?php
+session_start();
+if (!(isset($_SESSION['login']) && $_SESSION['login'] === true)) {
+  header("location: ./index.php");
+  exit;
+}
+
 if (!function_exists("GetSQLValueString")) {
   function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
   {
@@ -57,41 +63,41 @@ if (isset($_GET['totalRows_DetailRS1'])) {
 $totalPages_DetailRS1 = ceil($totalRows_DetailRS1 / $maxRows_DetailRS1) - 1;
 ?>
 <!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <h2>Loan Management System</h2>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <h2>Loan Management System</h2>
 </head>
 
 <body>
 
-    <table border="1" align="center">
-        <tr>
-            <td>id</td>
-            <td>
-                <?php echo $row_DetailRS1['id']; ?>
-            </td>
-        </tr>
-        <tr>
-            <td>loanType</td>
-            <td>
-                <?php echo $row_DetailRS1['loanType']; ?>
-            </td>
-        </tr>
-        <tr>
-            <td>description</td>
-            <td>
-                <?php echo $row_DetailRS1['description']; ?>
-            </td>
-        </tr>
-        <tr>
-            <td>creationDate</td>
-            <td>
-                <?php echo $row_DetailRS1['creationDate']; ?>
-            </td>
-        </tr>
-    </table>
+  <table border="1" align="center">
+    <tr>
+      <td>id</td>
+      <td>
+        <?php echo $row_DetailRS1['id']; ?>
+      </td>
+    </tr>
+    <tr>
+      <td>loanType</td>
+      <td>
+        <?php echo $row_DetailRS1['loanType']; ?>
+      </td>
+    </tr>
+    <tr>
+      <td>description</td>
+      <td>
+        <?php echo $row_DetailRS1['description']; ?>
+      </td>
+    </tr>
+    <tr>
+      <td>creationDate</td>
+      <td>
+        <?php echo $row_DetailRS1['creationDate']; ?>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>
 <?php

@@ -1,5 +1,11 @@
 <?php require_once('../Connections/mlms.php');
 
+session_start();
+if (!(isset($_SESSION['login']) && $_SESSION['login'] === true)) {
+    header("location: ./index.php");
+    exit;
+}
+
 $editFormAction = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
     $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
@@ -29,25 +35,25 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form")) {
     <title>Admin</title>
     <link rel="stylesheet" type="text/css" href="../Assets/css/style.css">
     <style>
-    td {
-        font-size: 20px;
-    }
+        td {
+            font-size: 20px;
+        }
 
-    form {
-        padding: 30px;
-        border: 1px solid greenyellow;
-        display: inline-block;
-        border-radius: 20px;
-        width: 60%;
-    }
+        form {
+            padding: 30px;
+            border: 1px solid greenyellow;
+            display: inline-block;
+            border-radius: 20px;
+            width: 60%;
+        }
 
-    table {
-        width: 100%;
-    }
+        table {
+            width: 100%;
+        }
 
-    input {
-        height: 30px;
-    }
+        input {
+            height: 30px;
+        }
     </style>
 </head>
 <body>
@@ -82,15 +88,15 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form")) {
 
 
     <script type="text/javascript">
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-        //document.getElementById("header").style.marginLeft = "250px";
-    }
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            //document.getElementById("header").style.marginLeft = "250px";
+        }
 
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        //document.getElementById("header").style.marginLeft= "0";
-    };
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            //document.getElementById("header").style.marginLeft= "0";
+        };
     </script>
 
 </body>
