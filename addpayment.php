@@ -149,7 +149,8 @@ form {
                         <tr>
                             <td style="text-align: left;">
                                 <label for="amount"><b>Amount:</b></label>
-                                <input type="text" placeholder="Enter amount" name="amount" maxlength="20" required>
+                                <input id="amount" type="text" placeholder="Enter amount" name="amount" maxlength="20"
+                                    required readonly>
                             </td>
                             <td></td>
                             <td style="text-align: left;">
@@ -193,13 +194,17 @@ form {
                 console.log(data);
                 document.getElementById("pymnt").style.display = "";
                 const container = document.getElementById('pyidDiv');
+                container.innerHTML = "";
 
                 const input = document.createElement("input");
                 input.type = "text";
                 input.value = data.result + 1;
                 input.setAttribute("name", "paymentId")
+                input.setAttribute("readonly", "true")
                 input.setAttribute("value", data.result + 1)
                 container.appendChild(input);
+
+                document.getElementById('amount').value = data.amount;
 
             });
 

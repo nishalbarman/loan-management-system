@@ -7,35 +7,9 @@ if (!(isset($_SESSION['login']) && $_SESSION['login'] === true)) {
     exit;
 }
 
-if (!function_exists("GetSQLValueString")) {
-    function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
-    {
-        if (PHP_VERSION < 6) {
-            $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
-        }
-
-        $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
-
-        switch ($theType) {
-            case "text":
-                $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-                break;
-            case "long":
-            case "int":
-                $theValue = ($theValue != "") ? intval($theValue) : "NULL";
-                break;
-            case "double":
-                $theValue = ($theValue != "") ? doubleval($theValue) : "NULL";
-                break;
-            case "date":
-                $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-                break;
-            case "defined":
-                $theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
-                break;
-        }
-        return $theValue;
-    }
+function GetSQLValueString($thevalue)
+{
+    return '$thevalue';
 }
 
 $editFormAction = $_SERVER['PHP_SELF'];
@@ -44,18 +18,20 @@ if (isset($_SERVER['QUERY_STRING'])) {
 }
 
 if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "form1")) {
-    $updateSQL = sprintf(
-        "UPDATE member SET fName=%s, lName=%s, phone=%s, occupation=%s, email=%s, address=%s, county=%s, photo=%s WHERE memberId=%s",
-        GetSQLValueString($_POST['fName'], "text"),
-        GetSQLValueString($_POST['lName'], "text"),
-        GetSQLValueString($_POST['phone'], "text"),
-        GetSQLValueString($_POST['occupation'], "text"),
-        GetSQLValueString($_POST['email'], "text"),
-        GetSQLValueString($_POST['address'], "text"),
-        GetSQLValueString($_POST['county'], "text"),
-        GetSQLValueString($_POST['photo'], "text"),
-        GetSQLValueString($_POST['memberId'], "int")
-    );
+
+
+    $fname = $_POST['fName'];
+    $lname = $_POST['lName'];
+    $phone = $_POST['phone'];
+    $occuption = $_POST['occupation'];
+    $email = $_POST['email'];
+    $address = $_POST['address'];
+    $country = $_POST['county'];
+    $memberId = $_POST['memberId'];
+
+    $updateSQL =
+        "UPDATE member SET fName='$fname', lName='$lname', phone='$phone', occupation='$occuption', email='$email', address='$address', county='$country' WHERE memberId=$memberId";
+
 
     mysqli_select_db($mlms, $database_mlms);
     $Result1 = mysqli_query($mlms, $updateSQL) or die(mysql_error());
@@ -69,7 +45,7 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "form1")) {
 }
 
 mysqli_select_db($mlms, $database_mlms);
-$query_updprof = "SELECT memberId, fName, lName, phone, occupation, email, address, county, photo FROM member";
+$query_updprof = "SELECT memberId, fName, lName, phone, occupation, email, address, county FROM member";
 $updprof = mysqli_query($mlms, $query_updprof);
 $row_updprof = mysqli_fetch_assoc($updprof);
 $totalRows_updprof = mysqli_num_rows($updprof);
@@ -145,12 +121,12 @@ $totalRows_updprof = mysqli_num_rows($updprof);
                                 value="<?php echo htmlentities($row_updprof['county'], ENT_COMPAT, 'utf-8'); ?>"
                                 size="32" /></td>
                     </tr>
-                    <tr valign="baseline">
+                    <!-- <tr valign="baseline">
                         <td nowrap="nowrap" align="left"><b>Photo:&nbsp;&nbsp;<b></td>
                         <td><input type="file" name="photo" required
                                 value="<?php echo htmlentities($row_updprof['photo'], ENT_COMPAT, 'utf-8'); ?>"
                                 size="32" /></td>
-                    </tr>
+                    </tr> -->
                 </table>
                 <br>
                 <input class="frmBtn" type="submit" value="Update profile" />

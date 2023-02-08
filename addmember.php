@@ -72,7 +72,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form")) {
     $_SESSION["memberID"] = mt_rand(10000, 99999);
     $insertSQL = sprintf(
-        "INSERT INTO member (memberId, fName, lName, gender, phone, occupation, email, password, address, county, district, location, photo, dob, regDate) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+        "INSERT INTO member (memberId, fName, lName, gender, phone, occupation, email, password, address, county, district, location, dob, regDate) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
         GetSQLValueString($_SESSION["memberID"], "int"),
         GetSQLValueString($_POST['fName'], "text"),
         GetSQLValueString($_POST['lName'], "text"),
@@ -85,7 +85,6 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form")) {
         GetSQLValueString($_POST['county'], "text"),
         GetSQLValueString($_POST['district'], "text"),
         GetSQLValueString($_POST['location'], "text"),
-        GetSQLValueString($_POST['photo'], "text"),
         GetSQLValueString($_POST['dob'], "date"),
         GetSQLValueString($_POST['regDate'], "date")
     );
